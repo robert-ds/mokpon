@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Mokpon Game</title>
+	<script src="./src/main.js"></script>
 </head>
 <body>
 
@@ -31,7 +32,7 @@
 		<label for="Pydos">Pydos - Tierra 🌱 y Fuego 🔥</label>
 		<input type="radio" id="Pydos" name="mascota" /><br>
 
-		<button>Seleccionar</button>
+		<button id="boton-mascota">Seleccionar</button>
 
 	</section>
 
@@ -39,13 +40,13 @@
 
 		<h2>Elige tu ataque:</h2>
 
-		<p>Tu mascota tiene <span>3</span> vidas</p>
-		<p>La mascota del enemigo tiene <span>3</span> vidas</p>
+		<p>Tu mascota <span id="mascota-jugador"></span> tiene <span>3</span> vidas</p>
+		<p>La mascota <span id="mascota-enemigo"></span> del enemigo tiene <span>3</span> vidas</p>
 
 		<p>
-			<button>Fuego 🔥</button>
-			<button>Agua 💦</button>
-			<button>Tierra 🌱	</button>
+			<button id="boton-fuego">Fuego 🔥</button>
+			<button id="boton-agua">Agua 💦</button>
+			<button id="boton-tierra">Tierra 🌱	</button>
 		</p>
 	</section>
 
@@ -54,10 +55,8 @@
 	</section>
 
 	<section id="reiniciar">
-		<button>Reiniciar juego</button>
+		<button id="boton-reiniciar">Reiniciar juego</button>
 	</section>
 
-	
-	
 </body>
 </html>
