@@ -2,8 +2,11 @@
 // Solo cuando cargue el Html se carga el script
 window.addEventListener('load', () => {
 
-	// Almacena el tipo de ataque
+	// Almacena el tipo de ataque del jugador
 	let ataqueJugador;
+
+	// Almacena el tipo de ataque enemigo
+	let ataqueEnemigo;
 
 	// Función para generar un numero aleatorio del 1 al 6
 	const aleatorio = (min, max) => {
@@ -12,21 +15,21 @@ window.addEventListener('load', () => {
 
 	// Selecciona de manera aletoria una Criatura Enemiga
 	const seleccionarMascotaEnemigo = () => {
-		let ataqueAleatorio = aleatorio(1,6);
+		let mascotaAleatoria = aleatorio(1,6);
 
 		let mascotaEnemigo = document.getElementById("mascota-enemigo");
 
-		if(ataqueAleatorio == 1) {
+		if(mascotaAleatoria == 1) {
 			mascotaEnemigo.innerHTML = "'Hipodoge', 'Elemento: Agua 💦',";
-		}else if(ataqueAleatorio == 2) {
+		}else if(mascotaAleatoria == 2) {
 			mascotaEnemigo.innerHTML = "'Capipepo', 'Elemento: Tierra 🌱',";
-		}else if(ataqueAleatorio == 3) {
+		}else if(mascotaAleatoria == 3) {
 			mascotaEnemigo.innerHTML = "'Ratigueya', 'Elemento: Fuego 🔥',";
-		}else if(ataqueAleatorio == 4) {
+		}else if(mascotaAleatoria == 4) {
 			mascotaEnemigo.innerHTML = "'Langostelvis', 'Elemento:  Agua 💦 y Fuego 🔥',";
-		}else if(ataqueAleatorio == 5) {
+		}else if(mascotaAleatoria == 5) {
 			mascotaEnemigo.innerHTML = "'Tucapalma', 'Elemento: Agua 💦 y Tierra 🌱',";
-		}else if(ataqueAleatorio == 6){
+		}else if(mascotaAleatoria == 6){
 			mascotaEnemigo.innerHTML = "'Pydos', 'Elemento: Tierra 🌱 y Fuego 🔥',";
 		}
 	};
@@ -73,22 +76,48 @@ window.addEventListener('load', () => {
 	let botonFuego = document.getElementById("boton-fuego");
 	botonFuego.addEventListener("click", () => {
 		ataqueJugador = "Fuego"
-		alert(ataqueJugador);
+		ataqueAleatorioEnemigo();
 	});
 
 	let botonAgua = document.getElementById("boton-agua");
 	botonAgua.addEventListener("click", () => {
 		ataqueJugador = "Agua"
-		alert(ataqueJugador);
+		ataqueAleatorioEnemigo();
 	});
 
 	let botonTierra = document.getElementById("boton-tierra");
 	botonTierra.addEventListener("click", () => {
 		ataqueJugador = "Tierra"
-		alert(ataqueJugador);
+		ataqueAleatorioEnemigo();
 	});
 
-	
+
+	// Creamos la lógica para el ataque del jugador enemigo
+	const ataqueAleatorioEnemigo = () => {
+		let ataqueAleatorio = aleatorio(1,3);
+		
+		if (ataqueAleatorio == 1) {
+			ataqueEnemigo = "Fuego";
+		}else if (ataqueAleatorio == 2) {
+			ataqueEnemigo == "Agua";
+		}else if (ataqueAleatorio == 3) {
+			ataqueEnemigo = "Tierra";
+		}
+
+		crearMensaje();
+
+	}
+
+	// Crear mensajes
+	const crearMensaje = () => {
+		let seccionMensaje = document.getElementById('mensajes');
+		let parrafo = document.createElement('p');
+
+		parrafo.innerHTML = "Tu mascota Ataco con "+ ataqueJugador + ", la mascota del enemigo ataco con " + ataqueEnemigo + ", - Ganaste";
+
+		seccionMensaje.appendChild(parrafo);
+
+	}
 
 
 });
