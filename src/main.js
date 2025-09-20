@@ -67,6 +67,9 @@ window.addEventListener('load', () => {
 		// Despues que el jugador selecciona una criatura, se selecciona de forma aleatoria una enemiga
 		seleccionarMascotaEnemigo();
 
+		let botonReiniciar = document.getElementById("boton-reiniciar");
+		botonReiniciar.addEventListener('click', reiniciarJuego);
+
 	});
 
 
@@ -161,9 +164,33 @@ window.addEventListener('load', () => {
 	const revisarVidas = () => {
 		if (vidasEnemigo == 0) {
 			crearMensajeFinal("Felicitaciones 🥳🥳🥳 Ganaste los Combates");
+
+			let botonFuego = document.getElementById("boton-fuego");
+			botonFuego.disabled = true;
+
+			let botonAgua = document.getElementById("boton-agua");
+			botonAgua.disabled = true;
+
+			let botonTierra = document.getElementById("boton-tierra");
+			botonTierra.disabled = true;
+
 		}else if (vidasJugador == 0) {
 			crearMensajeFinal("Que Mal Perdiste 😡😡😡");
+
+			let botonFuego = document.getElementById("boton-fuego");
+			botonFuego.disabled = true;
+
+			let botonAgua = document.getElementById("boton-agua");
+			botonAgua.disabled = true;
+
+			let botonTierra = document.getElementById("boton-tierra");
+			botonTierra.disabled = true;
+			
 		}
+	}
+
+	const reiniciarJuego = () => {
+		location.reload();
 	}
 
 	
