@@ -9,7 +9,14 @@ window.addEventListener('load', () => {
 	let ataqueEnemigo;
 
 	// Resultado del Combate
-	let resultado;
+	let resultadoCombate;
+
+	// Vidas de jugador y Enemigo
+	let vidasJugador = 3;
+	let vidasEnemigo = 3;
+
+	// Resultado Final del Juego
+	let resultadoFinal;
 
 	// Función para generar un numero aleatorio del 1 al 6
 	const aleatorio = (min, max) => {
@@ -18,7 +25,7 @@ window.addEventListener('load', () => {
 
 	// Selecciona de manera aletoria una Criatura Enemiga
 	const seleccionarMascotaEnemigo = () => {
-		let mascotaAleatoria = aleatorio(1,6);
+		let mascotaAleatoria = aleatorio(1,3);
 
 		let mascotaEnemigo = document.getElementById("mascota-enemigo");
 
@@ -28,12 +35,6 @@ window.addEventListener('load', () => {
 			mascotaEnemigo.innerHTML = "'Capipepo', 'Elemento: Tierra 🌱',";
 		}else if(mascotaAleatoria == 3) {
 			mascotaEnemigo.innerHTML = "'Ratigueya', 'Elemento: Fuego 🔥',";
-		}else if(mascotaAleatoria == 4) {
-			mascotaEnemigo.innerHTML = "'Langostelvis', 'Elemento:  Agua 💦 y Fuego 🔥',";
-		}else if(mascotaAleatoria == 5) {
-			mascotaEnemigo.innerHTML = "'Tucapalma', 'Elemento: Agua 💦 y Tierra 🌱',";
-		}else if(mascotaAleatoria == 6){
-			mascotaEnemigo.innerHTML = "'Pydos', 'Elemento: Tierra 🌱 y Fuego 🔥',";
 		}
 	};
 
@@ -59,12 +60,6 @@ window.addEventListener('load', () => {
 			mascotaJugador.innerHTML = "'Capipepo', 'Elemento: Tierra 🌱',";
 		}else if(inputRatigueya.checked){
 			mascotaJugador.innerHTML = "'Ratigueya', 'Elemento: Fuego 🔥',";
-		}else if(inputLangostelvis.checked){
-			mascotaJugador.innerHTML = "'Langostelvis', 'Elemento:  Agua 💦 y Fuego 🔥',";
-		}else if(inputTucapalma.checked){
-			mascotaJugador.innerHTML = "'Tucapalma', 'Elemento: Agua 💦 y Tierra 🌱',";
-		}else if(inputPydos.checked){
-			mascotaJugador.innerHTML = "'Pydos', 'Elemento: Tierra 🌱 y Fuego 🔥',";
 		}else{
 			alert("No Seleccionaste una Criatura")
 		}
@@ -112,11 +107,22 @@ window.addEventListener('load', () => {
 	}
 
 		// Crear mensajes
-		const crearMensaje = (resultado) => {
+		const crearMensaje = (resultadoCombate) => {
 			let seccionMensaje = document.getElementById('mensajes');
 			let parrafo = document.createElement('p');
 
-			parrafo.innerHTML = "Tu mascota Ataco con "+ ataqueJugador + ", la mascota del enemigo ataco con " + ataqueEnemigo + " - " + resultado;
+			parrafo.innerHTML = "Tu mascota Ataco con "+ ataqueJugador + ", la mascota del enemigo ataco con " + ataqueEnemigo + " - " + resultadoCombate;
+
+			seccionMensaje.appendChild(parrafo);
+
+		}
+
+		// Crear mensaje final
+		const crearMensajeFinal = (resultadoFinal) => {
+			let seccionMensaje = document.getElementById('mensajes');
+			let parrafo = document.createElement('p');
+
+			parrafo.innerHTML = resultadoFinal;
 
 			seccionMensaje.appendChild(parrafo);
 
@@ -125,21 +131,40 @@ window.addEventListener('load', () => {
 		// Logica de combate
 		const combate = () => {
 
-		if (ataqueEnemigo == ataqueJugador) {
-			crearMensaje("Ganaste");
-		}else if (ataqueJugador == "Fuego" && ataqueEnemigo == "Tierra") {
-			crearMensaje("Ganaste");
-		}else if (ataqueJugador == "Tierra" && ataqueEnemigo == "Agua") {
-			crearMensaje("Ganaste");
-		}else if (ataqueJugador == "Agua" && ataqueEnemigo == "Fuego") {
-			crearMensaje("Ganaste");
-		}else {
-			crearMensaje("Perdiste")
-		}
+			let spanVidasJugador = document.getElementById("vidas-jugador");
+			let spanVidasEnemigo = document.getElementById("vidas-enemigo");
+
+			if (ataqueEnemigo == ataqueJugador) {
+				crearMensaje("Empate");
+			}else if (ataqueJugador == "Fuego" && ataqueEnemigo == "Tierra") {
+				crearMensaje("Ganaste");
+				vidasEnemigo--;
+				spanVidasEnemigo.innerHTML = vidasEnemigo;
+			}else if (ataqueJugador == "Tierra" && ataqueEnemigo == "Agua") {
+				crearMensaje("Ganaste");
+				vidasEnemigo--;
+				spanVidasEnemigo.innerHTML = vidasEnemigo;
+			}else if (ataqueJugador == "Agua" && ataqueEnemigo == "Fuego") {
+				crearMensaje("Ganaste");
+				vidasEnemigo--;
+				spanVidasEnemigo.innerHTML = vidasEnemigo;
+			}else {
+				crearMensaje("Perdiste");
+				vidasJugador--;
+				spanVidasJugador.innerHTML = vidasJugador;
+			}
+
+			revisarVidas();
 
 	}
 
+	const revisarVidas = () => {
+		if (vidasEnemigo == 0) {
+			crearMensajeFinal("Felicitaciones 🥳🥳🥳 Ganaste los Combates");
+		}else if (vidasJugador == 0) {
+			crearMensajeFinal("Que Mal Perdiste 😡😡😡");
+		}
+	}
+
 	
-
-
 });
