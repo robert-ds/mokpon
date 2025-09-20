@@ -22,6 +22,7 @@ window.addEventListener('load', () => {
 	let seccionSeleccionarAtaque = document.getElementById("seleccionar-ataque");
 	seccionSeleccionarAtaque.style.display = 'none';
 
+	// Cuando el juego comienza, no aparece el boton reiniciar
 	let seccionReiniciar = document.getElementById('reiniciar');
 	seccionReiniciar.style.display = 'none';
 
@@ -43,6 +44,12 @@ window.addEventListener('load', () => {
 		}else if(mascotaAleatoria == 3) {
 			mascotaEnemigo.innerHTML = "'Ratigueya', 'Elemento: Fuego 🔥',";
 		}
+
+		// Ocultamos la seccion de selecionar mascota
+		let seccionSeleccionarMascota = document.getElementById("seleccionar-mascota");
+		seccionSeleccionarMascota.style.display = 'none';
+
+
 	};
 
 	// Obtenemos el boton selecionar
