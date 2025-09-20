@@ -18,6 +18,13 @@ window.addEventListener('load', () => {
 	// Resultado Final del Juego
 	let resultadoFinal;
 
+	// Ocualtamos la seccion de selecionar ataque mientras no se alla selecionado una criatura
+	let seccionSeleccionarAtaque = document.getElementById("seleccionar-ataque");
+	seccionSeleccionarAtaque.style.display = 'none';
+
+	let seccionReiniciar = document.getElementById('reiniciar');
+	seccionReiniciar.style.display = 'none';
+
 	// Función para generar un numero aleatorio del 1 al 6
 	const aleatorio = (min, max) => {
 		return Math.floor(Math.random() * (max - min + (1)) + min);
@@ -47,9 +54,6 @@ window.addEventListener('load', () => {
 		let inputHipodoge = document.getElementById("Hipodoge");
 		let inputCapipepo = document.getElementById("Capipepo");
 		let inputRatigueya = document.getElementById("Ratigueya");
-		let inputLangostelvis = document.getElementById("Langostelvis");
-		let inputTucapalma = document.getElementById("Tucapalma");
-		let inputPydos = document.getElementById("Pydos");
 
 		let mascotaJugador = document.getElementById("mascota-jugador");
 
@@ -63,6 +67,8 @@ window.addEventListener('load', () => {
 		}else{
 			alert("No Seleccionaste una Criatura")
 		}
+
+		seccionSeleccionarAtaque.style.display = 'block'
 
 		// Despues que el jugador selecciona una criatura, se selecciona de forma aleatoria una enemiga
 		seleccionarMascotaEnemigo();
@@ -174,6 +180,9 @@ window.addEventListener('load', () => {
 			let botonTierra = document.getElementById("boton-tierra");
 			botonTierra.disabled = true;
 
+			seccionReiniciar.style.display = 'block';
+
+
 		}else if (vidasJugador == 0) {
 			crearMensajeFinal("Que Mal Perdiste 😡😡😡");
 
@@ -185,7 +194,9 @@ window.addEventListener('load', () => {
 
 			let botonTierra = document.getElementById("boton-tierra");
 			botonTierra.disabled = true;
-			
+
+			seccionReiniciar.style.display = 'block';
+
 		}
 	}
 
