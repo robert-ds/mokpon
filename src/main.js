@@ -8,6 +8,9 @@ window.addEventListener('load', () => {
 	// Almacena el tipo de ataque enemigo
 	let ataqueEnemigo;
 
+	// Resultado del Combate
+	let resultado;
+
 	// Función para generar un numero aleatorio del 1 al 6
 	const aleatorio = (min, max) => {
 		return Math.floor(Math.random() * (max - min + (1)) + min);
@@ -104,20 +107,39 @@ window.addEventListener('load', () => {
 			ataqueEnemigo = "Tierra";
 		}
 
-		crearMensaje();
+		combate();
 
 	}
 
-	// Crear mensajes
-	const crearMensaje = () => {
-		let seccionMensaje = document.getElementById('mensajes');
-		let parrafo = document.createElement('p');
+		// Crear mensajes
+		const crearMensaje = (resultado) => {
+			let seccionMensaje = document.getElementById('mensajes');
+			let parrafo = document.createElement('p');
 
-		parrafo.innerHTML = "Tu mascota Ataco con "+ ataqueJugador + ", la mascota del enemigo ataco con " + ataqueEnemigo + ", - Ganaste";
+			parrafo.innerHTML = "Tu mascota Ataco con "+ ataqueJugador + ", la mascota del enemigo ataco con " + ataqueEnemigo + " - " + resultado;
 
-		seccionMensaje.appendChild(parrafo);
+			seccionMensaje.appendChild(parrafo);
+
+		}
+
+		// Logica de combate
+		const combate = () => {
+
+		if (ataqueEnemigo == ataqueJugador) {
+			crearMensaje("Ganaste");
+		}else if (ataqueJugador == "Fuego" && ataqueEnemigo == "Tierra") {
+			crearMensaje("Ganaste");
+		}else if (ataqueJugador == "Tierra" && ataqueEnemigo == "Agua") {
+			crearMensaje("Ganaste");
+		}else if (ataqueJugador == "Agua" && ataqueEnemigo == "Fuego") {
+			crearMensaje("Ganaste");
+		}else {
+			crearMensaje("Perdiste")
+		}
 
 	}
+
+	
 
 
 });
